@@ -1,15 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
         <AssemblyName>PulsarFuse</AssemblyName>
-        <RootNamespace>PulsarFuse</RootNamespace>
-        <Description>Some simple data structures which were inspired by Pulsar project</Description>
+        <Description>Simple data structures which were inspired by Pulsar project</Description>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageProjectUrl>https://github.com/wooly905/PulsarFuse</PackageProjectUrl>
         <RepositoryUrl>https://github.com/wooly905/PulsarFuse</RepositoryUrl>
-        <PackageLicenseExpression>MIT License</PackageLicenseExpression>
+        <RootNamespace>PulsarFuse</RootNamespace>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <Title>Pulsar Fuse</Title>
+        <Version>1.0.1</Version>
     </PropertyGroup>
-    
+
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <DefineConstants>DEBUG;TRACE</DefineConstants>
     </PropertyGroup>
@@ -18,4 +20,8 @@
         <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
     </ItemGroup>
 
+    <ItemGroup>
+        <None Include="LICENSE.txt" Pack="true" PackagePath=""/>
+    </ItemGroup>
+    
 </Project>

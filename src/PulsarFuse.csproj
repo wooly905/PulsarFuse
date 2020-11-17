@@ -1,9 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <AssemblyName>PulsarFuse</AssemblyName>
         <RootNamespace>PulsarFuse</RootNamespace>
+        <Description>Some simple data structures which were inspired by Pulsar project</Description>
+        <PackageProjectUrl>https://github.com/wooly905/PulsarFuse</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/wooly905/PulsarFuse</RepositoryUrl>
+        <PackageLicenseExpression>MIT License</PackageLicenseExpression>
     </PropertyGroup>
     
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

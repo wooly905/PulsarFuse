@@ -10,15 +10,21 @@ namespace PulsarFuse.HtmlDocument.Elements
     public class Table<T> : IHtmlElement where T : class
     {
         private readonly IEnumerable<T> _data;
+        private readonly IReadOnlyDictionary<string, Func<T, string>> _valueConvertors;
         private readonly string _id;
         private readonly string _name;
         private readonly string _style;
 
-        public Table(string id, string name, IEnumerable<T> data, string style = "")
+        public Table(IEnumerable<T> data,
+                     IReadOnlyDictionary<string, Func<T, string>> valueConvertors = null,
+                     string id = "",
+                     string name = "",
+                     string style = "")
         {
             _id = id;
             _name = name;
             _data = data;
+            _valueConvertors = valueConvertors;
             _style = style;
         }
 
@@ -63,7 +69,7 @@ namespace PulsarFuse.HtmlDocument.Elements
                 html.Append("</").Append(ElementNames.TableRow).Append('>');
             }
 
-            foreach(T record in _data)
+            foreach (T record in _data)
             {
                 IEnumerable<string> values = GetDataObjectPropertyValues(record);
                 html.Append('<').Append(ElementNames.TableRow).Append('>');
@@ -109,14 +115,22 @@ namespace PulsarFuse.HtmlDocument.Elements
             return displayAttr.Name;
         }
 
-        private IEnumerable<string> GetDataObjectPropertyValues(object obj)
+        private IEnumerable<string> GetDataObjectPropertyValues(T obj)
         {
             PropertyInfo[] propertyInfos = obj.GetType().GetProperties();
             List<string> values = new List<string>(propertyInfos.Length);
 
             foreach (PropertyInfo item in propertyInfos)
             {
-                values.Add(item.GetValue(obj).ToString());
+                if (_valueConvertors != null
+                    && _valueConvertors.TryGetValue(item.Name, out Func<T, string> converter))
+                {
+                    values.Add(converter(obj));
+                }
+                else
+                {
+                    values.Add(item.GetValue(obj).ToString());
+                }
             }
 
             return values;

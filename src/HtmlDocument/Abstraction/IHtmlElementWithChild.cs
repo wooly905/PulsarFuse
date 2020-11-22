@@ -9,5 +9,7 @@
         string Style { get; }
 
         void AddElement(IHtmlElement element);
+
+        void AddText(string text);
     }
 }

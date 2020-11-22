@@ -8,6 +8,7 @@ namespace PulsarFuse.HtmlDocument.Elements
     {
         private List<IHtmlElement> _elements;
         private readonly string _htmlElementName;
+        private string _postText;
 
         protected BaseElement(string id, string name, string htmlElementName, string style = "")
         {
@@ -18,9 +19,12 @@ namespace PulsarFuse.HtmlDocument.Elements
         }
 
         public string Id { get; }
-        public string Name { get; }
-        public string Style { get; }
+
         protected IReadOnlyList<IHtmlElement> InnerElements => _elements;
+
+        public string Name { get; }
+
+        public string Style { get; }
 
         public void AddElement(IHtmlElement element)
         {
@@ -30,6 +34,11 @@ namespace PulsarFuse.HtmlDocument.Elements
             }
 
             (_elements ?? (_elements = new List<IHtmlElement>())).Add(element);
+        }
+
+        public void AddText(string text)
+        {
+            _postText = text;
         }
 
         public virtual string ToHtml()
@@ -60,6 +69,11 @@ namespace PulsarFuse.HtmlDocument.Elements
                 {
                     html.Append(element.ToHtml());
                 }
+            }
+
+            if (!string.IsNullOrWhiteSpace(_postText))
+            {
+                html.Append(_postText);
             }
 
             html.Append("</").Append(_htmlElementName).Append('>');

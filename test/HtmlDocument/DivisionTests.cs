@@ -25,5 +25,17 @@ namespace TestProject.HtmlDocument
 
             Assert.Equal($"<div><div><p>{text}</p></div></div>", div2.ToHtml());
         }
+
+        [Fact]
+        public void PostTextTest()
+        {
+            string text = "This is a paragraph";
+            Paragraph para = new Paragraph(text);
+            string postText = "Post text";
+            Division div1 = new Division(para);
+            div1.AddText(postText);
+
+            Assert.Equal($"<div><p>{text}</p>{postText}</div>", div1.ToHtml());
+        }
     }
 }

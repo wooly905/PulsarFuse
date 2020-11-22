@@ -30,7 +30,7 @@ namespace PulsarFuse.HtmlDocument.Elements
             }
 
             StringBuilder html = new StringBuilder();
-            html.Append('<').Append(ElementNames.Table).Append(" border=\"1\"");
+            html.Append('<').Append(ElementNames.Table).Append(" width=\"100%\"");
 
             if (!string.IsNullOrWhiteSpace(_id))
             {
@@ -53,27 +53,27 @@ namespace PulsarFuse.HtmlDocument.Elements
 
             if (headerNames != null)
             {
-                html.Append("<tr>");
+                html.Append('<').Append(ElementNames.TableRow).Append('>');
 
                 foreach (string name in headerNames)
                 {
-                    html.Append("<td>").Append(name).Append("</td>");
+                    html.Append('<').Append(ElementNames.TableHead).Append('>').Append(name).Append("</").Append(ElementNames.TableHead).Append('>');
                 }
 
-                html.Append("</tr>");
+                html.Append("</").Append(ElementNames.TableRow).Append('>');
             }
 
             foreach(T record in _data)
             {
                 IEnumerable<string> values = GetDataObjectPropertyValues(record);
-                html.Append("<tr>");
+                html.Append('<').Append(ElementNames.TableRow).Append('>');
 
                 foreach (string value in values)
                 {
-                    html.Append("<td>").Append(value).Append("</td>");
+                    html.Append('<').Append(ElementNames.TableData).Append('>').Append(value).Append("</").Append(ElementNames.TableData).Append('>');
                 }
 
-                html.Append("</tr>");
+                html.Append("</").Append(ElementNames.TableRow).Append('>');
             }
 
             html.Append("</").Append(ElementNames.Table).Append('>');

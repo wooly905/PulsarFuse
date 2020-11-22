@@ -20,7 +20,7 @@ namespace TestProject.HtmlDocument
             Table<TestData> table = new Table<TestData>(id, name, data, style);
             string actual = table.ToHtml();
 
-            Assert.Equal($"<table border=\"1\" id=\"{id}\" name=\"{name}\" style=\"{style}\"><tr><td>Name</td><td>Id</td></tr><tr><td>Name 1</td><td>1</td></tr></table>", actual);
+            Assert.Equal($"<table width=\"100%\" id=\"{id}\" name=\"{name}\" style=\"{style}\"><tr><th>Name</th><th>Id</th></tr><tr><td>Name 1</td><td>1</td></tr></table>", actual);
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace TestProject.HtmlDocument
             Table<TestData2> table = new Table<TestData2>("", "", data, "");
             string actual = table.ToHtml();
 
-            Assert.Equal($"<table border=\"1\"><tr><td>First Name</td><td>Member Id</td><td>Created Time</td></tr><tr><td>Name 1</td><td>1</td><td>{now}</td></tr></table>", actual);
+            Assert.Equal($"<table width=\"100%\"><tr><th>First Name</th><th>Member Id</th><th>Created Time</th></tr><tr><td>Name 1</td><td>1</td><td>{now}</td></tr></table>", actual);
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace TestProject.HtmlDocument
             Division div = new Division(table);
             string actual = div.ToHtml();
 
-            Assert.Equal("<div><table border=\"1\"><tr><td>Name</td><td>Id</td></tr><tr><td>Name 1</td><td>1</td></tr></table></div>", actual);
+            Assert.Equal("<div><table width=\"100%\"><tr><th>Name</th><th>Id</th></tr><tr><td>Name 1</td><td>1</td></tr></table></div>", actual);
         }
     }
 
